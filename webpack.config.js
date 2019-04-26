@@ -4,7 +4,7 @@ const webpack = require("webpack");
 const { VueLoaderPlugin } = require("vue-loader");
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/main.js',
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
@@ -18,6 +18,13 @@ module.exports = {
       {test: /\.css$/, use: ['style-loader', 'css-loader']},
       {test: /\.less$/, use: ['style-loader', 'css-loader', 'less-loader']},
       {test: /\.vue$/, use: 'vue-loader'},
+      {
+        test: /\.(jpe?g|png|gif)$/i,
+        loader: "file-loader",
+        options: {
+          name: "[name].[ext]"
+        }
+      },
       {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
         use: [{
