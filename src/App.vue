@@ -47,6 +47,7 @@ export default {
 <style scoped>
 .body-container {
 	margin-top: 40px;
+	margin-bottom: 50px;
 	overflow-x: hidden;
 }
 
