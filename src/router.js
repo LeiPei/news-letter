@@ -8,6 +8,8 @@ import Shopping from './components/Shopping.vue'
 import Search from './components/Search.vue'
 import NewsList from './components/news/NewsList.vue'
 import NewsDetail from './components/news/NewsDetail.vue'
+import PhotoList from './components/photos/Photolist.vue'
+import PhotoDetal from './components/photos/PhotoDetail.vue'
 
 Vue.use(Router);
 
@@ -43,6 +45,14 @@ export default new Router({
       path: '/home/newslist/:id',
       component: NewsDetail,
       props: true
+    },
+    {
+      path: '/home/photolist',
+      component: PhotoList,
+    },
+    {
+      path: '/home/photolist/detail',
+      component: PhotoDetal,
     }
   ]
 });
