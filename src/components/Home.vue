@@ -1,12 +1,6 @@
 <template>
   <div>
-    <div class="swipe-container">
-      <mt-swipe :auto="4000">
-        <mt-swipe-item v-for="item in list" :key="item.id">
-          <img :src="getImageUrl(item.img)" alt="">
-        </mt-swipe-item>
-      </mt-swipe>
-    </div>
+    <swiper :list="list"></swiper>
 
     <ul class="mui-table-view mui-grid-view mui-grid-9">
 		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><router-link to="/home/newslist">
@@ -15,9 +9,9 @@
 		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><router-link to="/home/photolist">
 		                    <span class="mui-icon mui-icon-email"><span class="mui-badge">5</span></span>
 		                    <div class="mui-media-body">Share Pics</div></router-link></li>
-		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><router-link to="/home/goodslist">
 		                    <span class="mui-icon mui-icon-chatbubble"></span>
-		                    <div class="mui-media-body">Purchase</div></a></li>
+		                    <div class="mui-media-body">Purchase</div></router-link></li>
 		            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
 		                    <span class="mui-icon mui-icon-location"></span>
 		                    <div class="mui-media-body">Feedback</div></a></li>
@@ -33,6 +27,7 @@
 
 <script>
 import {Swipe, SwipeItem } from 'mint-ui';
+import Swiper from './common/Swiper.vue';
 
 export default {
   data() {
@@ -47,33 +42,14 @@ export default {
   },
   components: {
 		[Swipe.name]: Swipe,
-		[SwipeItem.name]: SwipeItem,
+    [SwipeItem.name]: SwipeItem,
+    swiper: Swiper
   }
 }
 </script>
 
 <style lang="less" scoped>
 @main-bg-color: #fff;
-
-.swipe-container {
-  height: 200px;
-  .mint-swipe-item {
-    &:nth-child(1) {
-      background-color: lightblue;
-    }
-    &:nth-child(2) {
-      background-color: lightcoral;
-    }
-    &:nth-child(3) {
-      background-color: lightgreen;
-    }
-    
-    img {
-      width: 100%;
-      height: 100%;
-    }
-  }
-}
 
 .mui-grid-view.mui-grid-9 {
   background-color: @main-bg-color;

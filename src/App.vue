@@ -21,7 +21,7 @@
 				<span class="mui-tab-label">Mebership</span>
 			</router-link>
 			<router-link class="mui-tab-item" to="/shopping">
-				<span class="mui-icon mui-icon-extra mui-icon-extra-cart"><span class="mui-badge">0</span></span>
+				<span class="mui-icon mui-icon-extra mui-icon-extra-cart"><span id="badge-cart" class="mui-badge">0</span></span>
 				<span class="mui-tab-label">Shopping Cart</span>
 			</router-link>
 			<router-link class="mui-tab-item" to="/search">
