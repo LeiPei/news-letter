@@ -51,11 +51,13 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import swiper from '../common/Swiper.vue';
 import {Button} from 'mint-ui';
 import numbox from '../common/GoodsInfoNumbox.vue';
+const uuidv4 = require('uuid/v4');
 export default {
-  props: ['id'],
+  props: ['id', 'price'],
   data() {
     return {
       list: [{id: 1, img: 'sea3.jpeg'}, {id: 2, img: 'sea3.jpeg'}, {id: 3, img: 'sea3.jpeg'}],
@@ -65,12 +67,22 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['addToCartAsync']),
     getSelectedCount(count) {
       this.selectedCount = count;
-      console.log(count);
     },
     addToCart() {
       this.showBall = !this.showBall;
+      // {id:id, count: count, price: itemPrice, selected:  whether to buy the item}
+      let itemObj = {
+        id: this.id,
+        count: this.selectedCount,
+        price: this.price,
+        selected: true
+      };
+
+      // store them to the store
+      this.addToCartAsync(itemObj);
     },
     beforeEnter(el) {
       el.style.transform = "translate(0, 0)";

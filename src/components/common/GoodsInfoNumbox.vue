@@ -8,11 +8,13 @@
 
 <script>
 import mui from '../../lib/mui/dist/js/mui.min.js';
+import { mapState } from 'vuex';
 export default {
   props: ['max'],
   mounted() {
     mui('.mui-numbox').numbox();
   },
+  computed: mapState(['count']),
   methods: {
     countChanged() {
       // console.log(this.$refs.numbox.value);

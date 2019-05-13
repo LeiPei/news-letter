@@ -15,7 +15,7 @@
       </div>
     </router-link> -->
 
-     <div v-for="good in commodities" :key="good.id" class="goods-item" @click="goToDetail(good.id)">
+     <div v-for="good in commodities" :key="good.id" class="goods-item" @click="goToDetail(good)">
       <img src="https://farm6.staticflickr.com/5591/15008867125_68a8ed88cc_b.jpg" alt="abc">
       <h1 class="title">Xiao MI NOTE 16G Purchase</h1>
       <div class="info">
@@ -35,18 +35,18 @@
 <script>
 export default {
   methods: {
-    goToDetail(id) {
-      this.$router.push('/home/goodsinfo/' + id);
+    goToDetail(good) {
+      this.$router.push('/home/goodsinfo/' + good.id + '/' + good.price);
     }
   },
   data() {
     return {
       commodities: [
-        {id: 1},
-        {id: 2},
-        {id: 3},
-        {id: 4},
-        {id: 5},
+        {id: 1, price: 100},
+        {id: 2, price: 200},
+        {id: 3, price: 300},
+        {id: 4, price: 400},
+        {id: 5, price: 500},
       ]
     }
   }
