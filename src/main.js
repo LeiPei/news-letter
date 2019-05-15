@@ -31,6 +31,33 @@ const store = new Vuex.Store({
       }
 
       localStorage.setItem('shoppingCart', JSON.stringify(state.shoppingCart));
+    },
+    updateCart(state, itemInfo) {
+      itemInfo.id = parseInt(itemInfo.id);
+      let item = state.shoppingCart.find(c => c.id === itemInfo.id);
+      if(item) {
+        item.count = parseInt(itemInfo.count);
+      }
+
+      localStorage.setItem('shoppingCart', JSON.stringify(state.shoppingCart));
+    },
+    updateCartSelected(state, itemInfo) {
+      itemInfo.id = parseInt(itemInfo.id);
+      let item = state.shoppingCart.find(c => c.id === itemInfo.id);
+      if(item) {
+        item.selected = itemInfo.selected;
+      }
+
+      localStorage.setItem('shoppingCart', JSON.stringify(state.shoppingCart));
+    },
+    removeItem(state, itemInfo) {
+      itemInfo.id = parseInt(itemInfo.id);
+      let itemIdx = state.shoppingCart.findIndex(c => c.id === itemInfo.id);
+      if(itemIdx >= 0) {
+        state.shoppingCart.splice(itemIdx, 1);
+      }
+
+      localStorage.setItem('shoppingCart', JSON.stringify(state.shoppingCart));
     }
   },
   actions: {
@@ -39,12 +66,33 @@ const store = new Vuex.Store({
     },
     addToCartAsync ({commit}, itemInfo) {
       commit('addToCart', itemInfo);
+    },
+    updateCartAsync({commit}, itemInfo) {
+      commit('updateCart', itemInfo);
+    },
+    removeItemAsync({commit}, itemInfo) {
+      commit('removeItem', itemInfo);
     }
   },
   getters: {
     getAllItemsCount(state) {
       const reducer = (accumulator, currentValue) => accumulator + currentValue.count;
       return state.shoppingCart.reduce(reducer, 0);
+    },
+    getGoodsCountAndAmount(state) {
+      let o = {
+        count: 0,
+        amount: 0
+      }
+
+      state.shoppingCart.forEach(item => {
+        if(item.selected) {
+          o.count += item.count;
+          o.amount += item.price * item.count;
+        }
+      });
+
+      return o;
     }
   }
 })

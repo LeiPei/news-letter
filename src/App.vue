@@ -1,7 +1,11 @@
 <template>
   <div>
     <!--header-->
-    <mt-header fixed title="fixed top"></mt-header>
+    <mt-header fixed title="fixed top">
+			<span slot="left" @click="goBack" v-show="canGoBack">
+				<mt-button icon="back">Back</mt-button>
+			</span>
+		</mt-header>
 
 		<!--body-->
     <div class="body-container">
@@ -33,14 +37,41 @@
 </template>
 
 <script>
-import { Header, Swipe, SwipeItem } from 'mint-ui';
+import {Button, Header, Swipe, SwipeItem } from 'mint-ui';
 
 export default {
   components: {
 		[Header.name]: Header,
 		[Swipe.name]: Swipe,
 		[SwipeItem.name]: SwipeItem,
-  }
+		[Button.name]: Button
+	},
+	created() {
+		if(this.$route.path === '/home') {
+			this.canGoBack = false;
+		} else {
+			this.canGoBack = true;
+		}
+	},
+	data() {
+		return {
+			canGoBack: false
+		}
+	},
+	methods: {
+		goBack(){
+			this.$router.go(-1);
+		}
+	},
+	watch: {
+		'$route.path': function(nv) {
+			if(nv === '/home') {
+				this.canGoBack = false;
+			} else {
+				this.canGoBack = true;
+			}
+		}
+	}
 }
 </script>
 
